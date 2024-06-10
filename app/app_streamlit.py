@@ -6,6 +6,12 @@ import base64
 from cliente import Cliente
 #━━━━━━━━━━━━━━❮◆❯━━━━━━━━━━━━━━
 
+
+#━━━━━━━━━━━━━━❮Configuração inicial do site❯━━━━━━━━━━━━━━
+st.set_page_config(page_title="Análise de Dados de Clientes", page_icon=":bar_chart:")
+st.title("Análise de Dados de Clientes")
+
+
 #━━━━━━━━━━━━━━❮Plano de fundo❯━━━━━━━━━━━━━━
 
 
@@ -15,7 +21,7 @@ def img_to_base64(img_path):
     
     
     
-encoded_image = img_to_base64(r'app\template\fundo.jpg')  # Ajuste o caminho conforme necessário
+encoded_image = img_to_base64(r'template\fundo.jpg')  # Ajuste o caminho conforme necessário
 
 def add_bg_from_local():
     st.markdown(
@@ -30,13 +36,8 @@ def add_bg_from_local():
         </style>
         """, unsafe_allow_html=True)
 
-# Chama a função para adicionar a imagem de fundo
 add_bg_from_local()
 
-#━━━━━━━━━━━━━━❮Configuração inicial do site❯━━━━━━━━━━━━━━
-st.set_page_config(page_title="Análise de Dados de Clientes", page_icon=":bar_chart:", layout="wide")
-
-st.title("Análise de Dados de Clientes")
 
 
 #━━━━━━━━━━━━━━❮upload de arquivo❯━━━━━━━━━━━━━━
