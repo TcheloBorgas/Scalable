@@ -21,22 +21,22 @@ def img_to_base64(img_path):
     
     
     
-encoded_image = img_to_base64(r'/usr/src/app/app/template/fundo.jpg')  
+# encoded_image = img_to_base64(r'..\app\template\fundo.jpg')  
 
-def add_bg_from_local():
-    st.markdown(
-        f"""
-        <style>
-        .stApp {{
-            background-image: url("data:image/jpg;base64,{encoded_image}");
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-        }}
-        </style>
-        """, unsafe_allow_html=True)
+# def add_bg_from_local():
+#     st.markdown(
+#         f"""
+#         <style>
+#         .stApp {{
+#             background-image: url("data:image/jpg;base64,{encoded_image}");
+#             background-size: cover;
+#             background-position: center;
+#             background-repeat: no-repeat;
+#         }}
+#         </style>
+#         """, unsafe_allow_html=True)
 
-add_bg_from_local()
+# add_bg_from_local()
 
 
 
