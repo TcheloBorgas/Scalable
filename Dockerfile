@@ -1,12 +1,5 @@
-# Use uma imagem base leve do Python
-FROM python:3.11-slim
-
-# Instale dependências de sistema
-RUN apt-get update && apt-get install -y \
-    build-essential \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
-
+# Use an official Python runtime as a parent image
+FROM python:3.8-slim
 
 # Set the working directory in the container
 WORKDIR /usr/src/app
@@ -15,16 +8,14 @@ WORKDIR /usr/src/app
 COPY requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
 
+# Create log directory and set proper permissions
+RUN mkdir -p /usr/src/app/logs && chown -R nobody:nogroup /usr/src/app/logs
+
 # Copy the application directory contents into the container at /usr/src/app
 COPY ./app /usr/src/app
 
-# Explicitly copy the template directory
-COPY ./app/template /usr/src/app/template
-
-# Copy supervisord configuration file
+# Copy supervisord configuration file and other necessary files
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
-
-# Copy other necessary files
 COPY ["Template Scalable Test - Página1.csv", "temp_file.csv", "./"]
 
 # Expose the ports used by Flask and Streamlit
@@ -32,4 +23,3 @@ EXPOSE 5000 8501
 
 # Set the command to run supervisord
 CMD ["supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
-
