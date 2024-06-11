@@ -16,6 +16,12 @@ COPY requirements.txt .
 # Instale as dependências do Python
 RUN pip install --no-cache-dir -r requirements.txt
 
+# Copy the application directory contents into the container at /usr/src/app
+COPY ./app /usr/src/app
+
+# Explicitly copy the template directory
+COPY ./app/template /usr/src/app/template
+
 # Copie a configuração do supervisord
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
