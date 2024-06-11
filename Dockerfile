@@ -7,13 +7,12 @@ RUN apt-get update && apt-get install -y \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
-# Defina o diretório de trabalho
-WORKDIR /app
 
-# Copie o arquivo requirements.txt para o contêiner
-COPY requirements.txt .
+# Set the working directory in the container
+WORKDIR /usr/src/app
 
-# Instale as dependências do Python
+# Install any needed packages specified in requirements.txt
+COPY requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy the application directory contents into the container at /usr/src/app
@@ -22,18 +21,15 @@ COPY ./app /usr/src/app
 # Explicitly copy the template directory
 COPY ./app/template /usr/src/app/template
 
-# Copie a configuração do supervisord
+# Copy supervisord configuration file
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
-# Crie os diretórios de log
-RUN mkdir -p /var/log/supervisor
+# Copy other necessary files
+COPY ["Template Scalable Test - Página1.csv", "temp_file.csv", "./"]
 
-# Copie os arquivos da aplicação para o diretório de trabalho
-COPY app/ .
+# Expose the ports used by Flask and Streamlit
+EXPOSE 5000 8501
 
-# Exponha as portas que serão usadas pelo Streamlit e Flask
-EXPOSE 8501
-EXPOSE 5000
-
-# Comando para iniciar o supervisord, que gerencia ambos os processos
+# Set the command to run supervisord
 CMD ["supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
+
