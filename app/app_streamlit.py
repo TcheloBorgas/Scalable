@@ -21,7 +21,7 @@ def img_to_base64(img_path):
     
     
     
-encoded_image = img_to_base64(r'..\app\template\fundo.jpg')  
+encoded_image = img_to_base64(r'/usr/src/app/app/template/fundo.jpg')  
 
 def add_bg_from_local():
     st.markdown(
